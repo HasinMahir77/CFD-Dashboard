@@ -145,8 +145,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initial load
   fetchData();
-  // Refresh table data every 2 seconds
-  setInterval(fetchData, 2000);
-  // Refresh chart data every 2 seconds (only if a device is selected)
-  setInterval(fetchChartData, 2000);
+  setInterval(fetchData, 4000);
+  setInterval(fetchChartData, 4000);
 });
