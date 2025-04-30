@@ -72,12 +72,10 @@ document.addEventListener("DOMContentLoaded", () => {
     data.forEach((item) => {
       const row = document.createElement("tr");
       row.innerHTML = `
-        <td>${item.id}</td>
         <td>${item.deviceid}</td>
         <td>${item.air_temperature}</td>
         <td>${item.humidity}</td>
         <td>${item.pressure}</td>
-        <td>${item.altitude}</td>
         <td>${item.pm1}</td>
         <td>${item.pm2_5}</td>
         <td>${item.pm10}</td>
