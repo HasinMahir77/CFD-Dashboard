@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/cfd/*"
+  to    = "http://mahir.iotexperience.com/cfd/:splat"
+  status = 200
+  force = true
