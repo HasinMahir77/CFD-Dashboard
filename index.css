@@ -17,3 +17,43 @@
     color: #ffffff;
     min-height: 5vh;
 }
+body {
+    font-family: 'Quicksand', sans-serif;
+  }
+  h1, h2, h5 {
+    font-weight: 600;
+  }
+  .card-title {
+    font-weight: 500;
+  }
+  .table {
+    font-size: 0.9rem;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  .table th, .table td {
+    vertical-align: middle;
+    text-align: center;
+  }
+  .table th:first-child {
+    border-top-left-radius: 0.5rem;
+  }
+  .table th:last-child {
+    border-top-right-radius: 0.5rem;
+  }
+  .table tbody tr:hover {
+    background-color: #f8f9fa;
+  }
+  .table tbody tr {
+    transition: background-color 0.3s ease;
+  }
+  .top-bar span {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  .chart-placeholder {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #6c757d;
+  }
