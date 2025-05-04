@@ -104,41 +104,43 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchChartData();
   };
 
-  const createOrUpdateChart = (chartId, title, xData, yData, yLabel) => {
-    const chartElement = document.getElementById(chartId);
-  
-    const trace = {
-      x: xData,
-      y: yData,
-      mode: "lines+markers",
-      name: yLabel,
-    };
-  
-    const layout = {
-      title: title,
-      xaxis: { title: "Time" },
-      yaxis: { title: yLabel },
-      margin: { t: 40, l: 50, r: 30, b: 50 },
-      responsive: true,
-    };
-  
-    // If the chart already exists, update it
-    if (chartElement.data) {
-      Plotly.react(chartElement, [trace], layout);
-    } else {
-      // Create a new chart
-      Plotly.newPlot(chartElement, [trace], layout);
-    }
-  };
-  
   const updateCharts = (labels, temperatures, humidities, pressures, pm1s, pm25s, pm10s, co2s) => {
-    createOrUpdateChart("tempChart", "Temperature (°C)", labels, temperatures, "Temperature (°C)");
-    createOrUpdateChart("humiChart", "Humidity (%)", labels, humidities, "Humidity (%)");
-    createOrUpdateChart("pressureChart", "Pressure (Pa)", labels, pressures, "Pressure (Pa)");
-    createOrUpdateChart("pm1Chart", "PM1 (µg/m³)", labels, pm1s, "PM1 (µg/m³)");
-    createOrUpdateChart("pm25Chart", "PM2.5 (µg/m³)", labels, pm25s, "PM2.5 (µg/m³)");
-    createOrUpdateChart("pm10Chart", "PM10 (µg/m³)", labels, pm10s, "PM10 (µg/m³)");
-    createOrUpdateChart("co2Chart", "CO₂ (ppm)", labels, co2s, "CO₂ (ppm)");
+    tempChart     = createOrUpdateChart(tempChart,    "tempChart",     "Temperature (°C)", labels, temperatures);
+    humiChart     = createOrUpdateChart(humiChart,    "humiChart",     "Humidity (%)",    labels, humidities);
+    pressureChart = createOrUpdateChart(pressureChart,"pressureChart", "Pressure (Pa)",   labels, pressures);
+    pm1Chart      = createOrUpdateChart(pm1Chart,     "pm1Chart",      "PM1 (µg/m³)",      labels, pm1s);
+    pm25Chart     = createOrUpdateChart(pm25Chart,    "pm25Chart",     "PM2.5 (µg/m³)",    labels, pm25s);
+    pm10Chart     = createOrUpdateChart(pm10Chart,    "pm10Chart",     "PM10 (µg/m³)",     labels, pm10s);
+    co2Chart      = createOrUpdateChart(co2Chart,     "co2Chart",      "CO₂ (ppm)",        labels, co2s);
+  };
+
+  const createOrUpdateChart = (chart, canvasId, label, labels, data) => {
+    const ctx = document.getElementById(canvasId).getContext("2d");
+    if (chart) {
+      chart.data.labels = labels;
+      chart.data.datasets[0].data = data;
+      chart.update();
+    } else {
+      chart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: labels,
+          datasets: [{
+            label: label,
+            data: data,
+            // styling can be customized in CSS or Chart.js options
+            borderWidth: 1,
+          }],
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: true },
+          },
+        },
+      });
+    }
+    return chart;
   };
 
   // Initial load
