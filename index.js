@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`http://mahir.iotexperience.com/cfd/get-latest-all`);
+      const response = await fetch(`/cfd/get-latest-all`);
       if (!response.ok) {
         throw new Error(`Failed to fetch data (status ${response.status})`);
       }
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!selectedDeviceId) return; // No device selected
 
     try {
-      const response = await fetch(`http://mahir.iotexperience.com/cfd/get-last-50/${selectedDeviceId}`);
+      const response = await fetch(`/cfd/get-last-50/${selectedDeviceId}`);
       if (!response.ok) {
         throw new Error(`Failed to fetch chart data (status ${response.status})`);
       }
