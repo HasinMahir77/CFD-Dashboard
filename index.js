@@ -67,12 +67,29 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  const getDevicePosition = (deviceId) => {
+    const positions = {
+      '1': 'North',
+      '2': 'East North',
+      '3': 'East South',
+      '4': 'East',
+      '5': 'South',
+      '6': 'West South',
+      '7': 'West',
+      '8': 'South West',
+      '9': 'West North',
+      '10': 'North West'
+    };
+    return positions[deviceId] || 'Unknown';
+  };
+
   const populateTable = (data) => {
     tableBody.innerHTML = ""; // Clear existing rows
     data.forEach((item) => {
       const row = document.createElement("tr");
       row.innerHTML = `
         <td>${item.deviceid}</td>
+        <td>${getDevicePosition(item.deviceid)}</td>
         <td>${item.air_temperature}</td>
         <td>${item.humidity}</td>
         <td>${item.pressure}</td>
