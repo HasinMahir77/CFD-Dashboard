@@ -87,6 +87,10 @@ document.addEventListener("DOMContentLoaded", () => {
     tableBody.innerHTML = ""; // Clear existing rows
     data.forEach((item) => {
       const row = document.createElement("tr");
+      const timestamp = new Date(item.timestamp);
+      const now = new Date();
+      const minutesDiff = (now - timestamp) / (1000 * 60); // Convert to minutes
+      
       row.innerHTML = `
         <td>${item.deviceid}</td>
         <td>${getDevicePosition(item.deviceid)}</td>
@@ -97,8 +101,14 @@ document.addEventListener("DOMContentLoaded", () => {
         <td>${item.pm2_5}</td>
         <td>${item.pm10}</td>
         <td>${item.co2}</td>
-        <td>${new Date(item.timestamp).toLocaleString()}</td>
+        <td>${timestamp.toLocaleString()}</td>
       `;
+      
+      // Add light red background if data is more than 10 minutes old
+      if (minutesDiff > 10) {
+        row.style.backgroundColor = '#ffebee'; // Light red color
+      }
+      
       row.addEventListener("click", () => handleRowClick(row, item.deviceid));
       tableBody.appendChild(row);
     });
